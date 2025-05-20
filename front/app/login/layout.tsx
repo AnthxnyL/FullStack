@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
  
 export const metadata: Metadata = {
-  title: "Projets",
-  description: "Découvrez les derniers projets de l'école",
+  title: "Connexion",
+  description: "Connexion à notre blog",
 };
  
 export default function RootLayout({
@@ -12,10 +11,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
-      <body>
-        {children}
-      </body>
-    </html>
+    <>
+      {children}
+    </>
   );
 }

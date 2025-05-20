@@ -57,7 +57,8 @@ class Project
 
     #[Groups(['read', 'write'])]
     #[ORM\Column(length: 255)]
-    private ?string $Image = null;
+    #[Assert\NotBlank]
+    private ?string $image = null;
 
     #[Groups(['read', 'write'])]
     #[ORM\Column(type: Types::ARRAY)]
@@ -113,12 +114,12 @@ class Project
 
     public function getImage(): ?string
     {
-        return $this->Image;
+        return $this->image;
     }
 
-    public function setImage(string $Image): static
+    public function setImage(string $image): static
     {
-        $this->Image = $Image;
+        $this->image = $image;
 
         return $this;
     }
