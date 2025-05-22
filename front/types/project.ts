@@ -6,6 +6,7 @@ export type Project = {
     description: string;
     techno_used: string[];
     image: string;
+    is_active: boolean;
     date: string;
     student: User[];
 };
