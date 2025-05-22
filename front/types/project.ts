@@ -4,8 +4,8 @@ export type Project = {
     id: number;
     title: string;
     description: string;
-    technoUsed: string[];
+    techno_used: string[];
     image: string;
     date: string;
-    author: User;
+    student: User[];
 };

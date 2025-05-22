@@ -3,7 +3,7 @@ export type User = {
     email: string;
     password: string;
     roles: string[];
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     projects: string[];
 };

@@ -50,6 +50,10 @@ class Project
     private ?string $title = null;
 
     #[Groups(['read', 'write'])]
+    #[ORM\Column]
+    private ?bool $is_active = true;
+
+    #[Groups(['read', 'write'])]
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 10)]
@@ -97,6 +101,16 @@ class Project
     {
         $this->title = $title;
 
+        return $this;
+    }
+
+    public function getIsActive(): ?string
+    {
+        return $this->is_active;
+    }
+    public function setIsActive(bool $is_active): static
+    {
+        $this->is_active = $is_active;
         return $this;
     }
 

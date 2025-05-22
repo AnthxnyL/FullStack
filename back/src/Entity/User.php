@@ -163,6 +163,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->last_name = $last_name;
         return $this;
     }
+  
 
     public function getFirstName(): ?string
     {

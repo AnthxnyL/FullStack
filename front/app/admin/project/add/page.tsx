@@ -32,11 +32,13 @@ export default function AddArticle() {
         const formData = new FormData(e.target as HTMLFormElement);
         const title = formData.get("title");
         const description = formData.get("description");
-        const user = formData.get("user");
-        const technoUsed = formData.get("technoUsed");
         const date = formData.get("date");
         const image = formData.get("image");
-        
+
+        // Pour les champs multiples :
+        const users = formData.getAll("user");         // tableau des @id
+        const technos = formData.getAll("technoUsed"); // tableau des strings
+
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`, {
             method: "POST",
             headers: {
@@ -44,15 +46,14 @@ export default function AddArticle() {
                 "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify({
-                title: title,
-                description: description,
-                user: user,
-                techno_used: [technoUsed],
-                date: date,
-                image: image
+                title,
+                description,
+                date,
+                image,
+                student: users,          
+                techno_used: technos,     
             }),
         });
-
  
         const data = await response.json();
         if (response.ok) {
@@ -83,14 +84,16 @@ export default function AddArticle() {
                     <label htmlFor="date">Date</label>
                     <input id="date" name="date"></input>
                     <br />
-                    <label htmlFor="technoUsed">Techno utilisées</label>
-                    <input id="technoUsed" name="technoUsed"></input>
+                    <label htmlFor="technoUsed">Technos utilisées</label>
+                    <input name="technoUsed" />
+                    <input name="technoUsed" />
+                    <input name="technoUsed" />
                     <br />
                     <label htmlFor="image">Image</label>
                     <input id="image" name="image" type="text"></input>
                     <br />
-                    <label htmlFor="user">User</label>
-                    <select id="user" name="user">
+                    <label htmlFor="user">Users</label>
+                    <select id="user" name="user" multiple>
                         {users.map((user: any) => (
                             <option value={user['@id']} key={user.id}>{user.first_name}</option>
                         ))}

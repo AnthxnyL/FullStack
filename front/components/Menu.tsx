@@ -15,7 +15,6 @@ export default function Menu() {
         if (session) {
             setIsLogged(true);
             setIsAdmin(session.roles.includes("ROLE_ADMIN"));
-
         }
     };
  
