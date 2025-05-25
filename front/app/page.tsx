@@ -2,6 +2,7 @@
 
 import { Project } from "@/types/project";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { getSession, getToken } from "@/utils/jwt";
 
@@ -99,56 +100,62 @@ export default function Home() {
               <li key={project.id} style={{ marginBottom: '30px' }}>
                 <h2>{project.title}</h2>
                 {project.image && (
-                  <div style={{ position: 'relative', width: '100%', height: '200px', marginBottom: '15px' }}>
+                  <div>
                     <img 
                       src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/projects/${project.image}`}
                       alt={project.title}
-                      style={{ objectFit: 'cover', borderRadius: '8px' }}
-                    />
+                    >
+                    </img>
                   </div>
                 )}
                 <p>{project.description}</p>
-                <p>
-                  <Link href={`/project/${project.id}`}>Afficher le projet</Link>
-                </p>
+                <div className="flex gap-2">
+                  <button>
+                    <Link href={`/project/${project.id}`}>Open</Link>
+                  </button>
+                  {isAdmin && (
+                    <>
+                      <button 
+                        onClick={() => deleteProject(project.id)} 
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => toggleProjectVisibility(project.id, project.is_active)}
+                      >
+                        Hide
+                      </button>
+                    </>
+                  )}
+                </div>
+
                 <hr />
-                {isAdmin && (
-                  <div>
-                    <button 
-                      onClick={() => deleteProject(project.id)} 
-                    >
-                      Supprimer le projet
-                    </button>
-                    <button
-                      onClick={() => toggleProjectVisibility(project.id, project.is_active)}
-                    >
-                      Cacher le projet
-                    </button>
-                  </div>
-                )}
               </li>
+
             ) : isAdmin && (
               <li key={project.id} style={{ opacity: 0.5 }}>
                 <h2>{project.title} (caché)</h2>
                 <p>{project.description}</p>
-                <p>
-                  <Link href={`/project/${project.id}`}>Afficher le projet</Link>
-                </p>
-                <hr />
-                {isAdmin && (
-                  <div>
-                    <button 
-                      onClick={() => deleteProject(project.id)} 
-                    >
-                      Supprimer le projet
-                    </button>
-                    <button
-                      onClick={() => toggleProjectVisibility(project.id, project.is_active)}
-                    >
-                      Montrer le projet
-                    </button>
+                <div>
+                  <button>
+                    <Link href={`/project/${project.id}`}>Open</Link>
+                  </button>
+                  {isAdmin && (
+                    <>
+                      <button 
+                        onClick={() => deleteProject(project.id)} 
+                      >
+                        Delete
+                      </button>
+                      <button 
+                        onClick={() => toggleProjectVisibility(project.id, project.is_active)}
+                      >
+                        Show
+                      </button>
+                    </>
+                  )}
                   </div>
-                )}
+                <hr />
               </li>
             )
           ))}

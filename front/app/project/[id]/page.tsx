@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import { Project } from "@/types/project";
-import Image from "next/image";
  
 export default function ArticlePage() {
     // Récupération de l'id de l'article via l'URL
@@ -45,11 +44,10 @@ export default function ArticlePage() {
                 <p>Aucun élève trouvé</p>
             )}
             {project.image && (
-                <div style={{ position: 'relative', width: '100%', height: '300px', marginBottom: '20px' }}>
-                    <Image 
+                <div>
+                    <img 
                         src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/projects/${project.image}`} 
                         alt="Image du projet"
-                        fill
                         style={{ objectFit: 'cover' }}
                     /> 
                 </div>

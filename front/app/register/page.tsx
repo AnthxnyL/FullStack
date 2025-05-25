@@ -44,9 +44,13 @@ export default function Register() {
             <h1>Inscription</h1>
             {response && <p>{response}</p>}
             <form method="POST" onSubmit={handleSubmit}>
+                <label htmlFor="email">Email</label>
                 <input type="email" name="email" placeholder="Email" required />
+                <label htmlFor="plainPassword">Password</label>
                 <input type="password" name="plainPassword" placeholder="Mot de passe" required />
+                <label htmlFor="firstName">First name</label>
                 <input type="text" name="firstName" placeholder="Jhon" required />
+                <label htmlFor="lastName">Last name</label>
                 <input type="text" name="lastName" placeholder="Doe" required />
                 <button type="submit">Inscription</button>
             </form>
