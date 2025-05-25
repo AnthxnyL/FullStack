@@ -1,7 +1,9 @@
 "use client";
  
-import { useState } from "react";
- 
+import { useState, useEffect } from "react";
+import ErrorMessage from "@/components/ErrorMessage";
+import SuccessMessage from "@/components/SuccessMessage";
+
 export default function Register() {
     const [response, setResponse] = useState<string>("");
  
@@ -38,11 +40,22 @@ export default function Register() {
             }
         }
     }
+
+    useEffect(() => {
+        if (response.includes('réussie')) {
+            const timer = setTimeout(() => setResponse(""), 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [response]);
  
     return (
         <div>
             <h1>Inscription</h1>
-            {response && <p>{response}</p>}
+            {response.includes('réussie') ? (
+                <SuccessMessage message={response} />
+            ) : (
+                <ErrorMessage message={response} />
+            )}
             <form method="POST" onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email" placeholder="Email" required />
