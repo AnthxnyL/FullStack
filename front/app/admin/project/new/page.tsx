@@ -6,6 +6,8 @@ import { getToken } from "@/utils/jwt";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import Image from "next/image";
+import ErrorMessage from "@/components/ErrorMessage";
+import SuccessMessage from "@/components/SuccessMessage";
 
 export default function NewProject() {
   const router = useRouter();
@@ -199,14 +201,22 @@ export default function NewProject() {
     }
   };
 
+  useEffect(() => {
+    if (message.includes("succès")) {
+      const timer = setTimeout(() => setMessage(""), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [message]);
+
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Ajouter un nouveau projet</h1>
-      
+      <h1>Ajouter un nouveau projet</h1>
       {message && (
-        <div className={`mb-4 p-3 ${message.includes("succès") ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"} rounded`}>
-          {message}
-        </div>
+        message.includes("succès") ? (
+          <SuccessMessage message={message} />
+        ) : (
+          <ErrorMessage message={message} />
+        )
       )}
       
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -276,7 +286,7 @@ export default function NewProject() {
             <button
               type="button"
               onClick={addTechno}
-              className="px-4 py-2 bg-blue-500 text-white rounded-r"
+             
             >
               +
             </button>

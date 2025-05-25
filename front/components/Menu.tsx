@@ -33,7 +33,7 @@ export default function Menu() {
     const handleLinkClick = () => setOpen(false);
     
     return (
-        <nav className="mb-6">
+        <nav className="container mx-auto">
             <div className="flex items-center justify-between py-2">
                 <Link href="/" className="font-bold text-lg">Accueil</Link>
                 <button

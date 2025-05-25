@@ -84,6 +84,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'student')]
     private Collection $projects;
 
+    #[Groups(['read', 'write'])]
+    #[ORM\Column(type: 'integer', options: ['default' => 1])]
+    #[Assert\Range(min: 1, max: 5, notInRangeMessage: 'L\'année d\'étude doit être comprise entre 1 et 5.')]
+    private ?int $study_year = 1;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -163,7 +168,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->last_name = $last_name;
         return $this;
     }
-  
+
 
     public function getFirstName(): ?string
     {
@@ -219,6 +224,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->plainPassword = $plainPassword;
 
+        return $this;
+    }
+
+    public function getStudyYear(): ?int
+    {
+        return $this->study_year;
+    }
+    public function setStudyYear(?int $study_year): self
+    {
+        $this->study_year = $study_year;
         return $this;
     }
 }

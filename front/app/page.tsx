@@ -104,6 +104,7 @@ export default function Home() {
                     <img 
                       src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/projects/${project.image}`}
                       alt={project.title}
+                      className="pb-4"
                     >
                     </img>
                   </div>

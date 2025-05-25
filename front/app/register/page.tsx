@@ -14,6 +14,7 @@ export default function Register() {
         const plainPassword = formData.get("plainPassword") as string;
         const firstName = formData.get("firstName") as string;
         const lastName = formData.get("lastName") as string;
+        const studyYear = Number(formData.get("study_year"));
         
         const register = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
             method: "POST",
@@ -24,7 +25,8 @@ export default function Register() {
                 email: email,
                 plainPassword: plainPassword,
                 first_name: firstName,
-                last_name: lastName
+                last_name: lastName,
+                study_year: studyYear
             }),
         });
 
@@ -65,6 +67,14 @@ export default function Register() {
                 <input type="text" name="firstName" placeholder="Jhon" required />
                 <label htmlFor="lastName">Last name</label>
                 <input type="text" name="lastName" placeholder="Doe" required />
+                <label htmlFor="study_year">Année d&apos;étude</label>
+                <select name="study_year" required defaultValue={1}>
+                  <option value={1}>1ère année</option>
+                  <option value={2}>2ème année</option>
+                  <option value={3}>3ème année</option>
+                  <option value={4}>4ème année</option>
+                  <option value={5}>5ème année</option>
+                </select>
                 <button type="submit">Inscription</button>
             </form>
         </div>

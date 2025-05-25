@@ -34,10 +34,10 @@ export default function ArticlePage() {
             <p>{project.date}</p>
             {project.student && project.student.length > 0 ? (
                 project.student.map((student) => (
-                    <div key={student.id}>
-                        <h2>élève</h2>
-                        <p>{student.first_name}</p>
-                        <p>{student.last_name}</p>
+                    <div key={student.id} className="mb-2">
+                        <h2>Élève</h2>
+                        <p>{student.first_name} {student.last_name}</p>
+                        <p>Année d&apos;étude : {student.study_year} / 5</p>
                     </div>
                 ))
             ) : (
