@@ -118,6 +118,7 @@ export default function Home() {
                     <>
                       <button 
                         onClick={() => deleteProject(project.id)} 
+                        className="btn-danger"
                       >
                         Delete
                       </button>
@@ -136,8 +137,18 @@ export default function Home() {
             ) : isAdmin && (
               <li key={project.id} style={{ opacity: 0.5 }}>
                 <h2>{project.title} (caché)</h2>
+                {project.image && (
+                  <div>
+                    <img 
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/projects/${project.image}`}
+                      alt={project.title}
+                      className="pb-4 aspect-[16/9] object-cover w-full"
+                    >
+                    </img>
+                  </div>
+                )}
                 <p>{project.description.length > 40 ? project.description.slice(0, 40) + "..." : project.description}</p>
-                <div>
+                <div className="flex gap-2">
                   <button>
                     <Link href={`/project/${project.id}`}>Open</Link>
                   </button>
@@ -145,6 +156,7 @@ export default function Home() {
                     <>
                       <button 
                         onClick={() => deleteProject(project.id)} 
+                        className="btn-danger"
                       >
                         Delete
                       </button>

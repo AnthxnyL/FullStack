@@ -33,8 +33,6 @@ body {
 .container, main {
   max-width: 480px;
   margin: 0 auto;
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 8px 0 #0001;
   padding: 1.5rem 1rem;
 }
 
@@ -93,6 +91,33 @@ button {
 
 button:hover {
   background: #1d4ed8;
+}
+
+/* Bouton rouge pour les actions dangereuses (delete, déconnexion) */
+button.btn-danger, .btn-danger, a.btn-danger {
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  transition: background 0.2s;
+}
+button.btn-danger:hover, .btn-danger:hover, a.btn-danger:hover {
+  background: #b91c1c;
+}
+
+/* Bouton contour bleu (connexion) */
+button.btn-outline, .btn-outline, a.btn-outline {
+  background: transparent;
+  color: #2563eb;
+  border: 2px solid #2563eb;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+button.btn-outline:hover, .btn-outline:hover, a.btn-outline:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
 }
 
 hr {

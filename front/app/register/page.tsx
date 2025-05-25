@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
+import Link from "next/link";
 
 export default function Register() {
     const [response, setResponse] = useState<string>("");
@@ -42,13 +43,6 @@ export default function Register() {
             }
         }
     }
-
-    useEffect(() => {
-        if (response.includes('réussie')) {
-            const timer = setTimeout(() => setResponse(""), 5000);
-            return () => clearTimeout(timer);
-        }
-    }, [response]);
  
     return (
         <div>
@@ -75,7 +69,12 @@ export default function Register() {
                     <option value={4}>4ème année</option>
                     <option value={5}>5ème année</option>
                 </select>
-                <button type="submit">Inscription</button>
+                <div className="flex gap-4">
+                    <button className="btn-outline" type="submit">Inscription</button>
+                    {response.includes('réussie') && (
+                        <button><Link href="/login">Connexion</Link></button>
+                    )}
+                </div>
             </form>
         </div>
     );
