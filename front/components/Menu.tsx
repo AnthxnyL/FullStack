@@ -38,7 +38,7 @@ export default function Menu() {
                     <>
                         {isAdmin && (
                             <>
-                                <li><Link href="/admin/project/add">Ajouter un projet</Link></li>
+                                <li><Link href="/admin/project/new">Ajouter un projet</Link></li>
                             </>
                         )}
                         <li><Link href="#" onClick={handleLogout}>Déconnexion</Link></li>

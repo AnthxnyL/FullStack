@@ -1,0 +1,10 @@
+Options +FollowSymLinks
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule .* - [L]
+</IfModule>
+<IfModule !mod_rewrite.c>
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+    </IfModule>
+</IfModule>

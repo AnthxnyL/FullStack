@@ -5,7 +5,8 @@ export type Project = {
     title: string;
     description: string;
     techno_used: string[];
-    image: string;
+    image: string | null;
+    imageFile?: File | null;
     is_active: boolean;
     date: string;
     student: User[];

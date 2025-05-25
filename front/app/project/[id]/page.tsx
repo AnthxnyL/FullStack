@@ -44,26 +44,16 @@ export default function ArticlePage() {
             ) : (
                 <p>Aucun élève trouvé</p>
             )}
-            { project.image && (project.image.startsWith('/')) ? (
-                <div style={{ position: 'relative', width: '100%', height: '300px' }}>
+            {project.image && (
+                <div style={{ position: 'relative', width: '100%', height: '300px', marginBottom: '20px' }}>
                     <Image 
-                        src={project.image} 
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/projects/${project.image}`} 
                         alt="Image du projet"
                         fill
                         style={{ objectFit: 'cover' }}
                     /> 
                 </div>
-            ) : project.image && (project.image.startsWith('http')) ? (
-                <div>
-                    <img
-                        src={project.image}
-                        alt="Image du projet"
-                        style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-                    />
-                </div>
-            ) : project.image ? (
-                <p>Image non valide: {project.image}</p>
-            ) : null}   
+            )}   
 
             {project.techno_used && Array.isArray(project.techno_used) && project.techno_used.length > 0 ? (
                 <div>

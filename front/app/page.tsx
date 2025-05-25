@@ -96,8 +96,17 @@ export default function Home() {
         <ul>
           {projects.map((project) => (
             project.is_active ? (
-              <li key={project.id}>
+              <li key={project.id} style={{ marginBottom: '30px' }}>
                 <h2>{project.title}</h2>
+                {project.image && (
+                  <div style={{ position: 'relative', width: '100%', height: '200px', marginBottom: '15px' }}>
+                    <img 
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/projects/${project.image}`}
+                      alt={project.title}
+                      style={{ objectFit: 'cover', borderRadius: '8px' }}
+                    />
+                  </div>
+                )}
                 <p>{project.description}</p>
                 <p>
                   <Link href={`/project/${project.id}`}>Afficher le projet</Link>

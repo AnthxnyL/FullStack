@@ -15,13 +15,14 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Delete;
 
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Serializer\Attribute\Groups;
-
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[UniqueEntity('title')]
-
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 #[ApiResource(
     operations: [
@@ -59,14 +60,19 @@ class Project
     #[Assert\Length(min: 10)]
     private ?string $description = null;
 
-    #[Groups(['read', 'write'])]
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[Groups(['read'])]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
+
+    #[Groups(['write'])]
+    #[Vich\UploadableField(mapping: 'project_images', fileNameProperty: 'image')]
+    private ?File $imageFile = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[Groups(['read', 'write'])]
     #[ORM\Column(type: Types::ARRAY)]
-    #[Assert\NotBlank]
     private array $techno_used = [];
 
     /**
@@ -74,7 +80,6 @@ class Project
      */
     #[Groups(['read', 'write'])]
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'projects')]
-    #[Assert\NotBlank]
     private Collection $student;
 
     #[Groups(['read', 'write'])]
@@ -131,9 +136,40 @@ class Project
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
