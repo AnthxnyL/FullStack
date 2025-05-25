@@ -67,7 +67,6 @@ NEXT_PUBLIC_API_URL=http://your_api_url
 
 ```bash
 cd front
-npm i
 npm run dev
 ```
 
