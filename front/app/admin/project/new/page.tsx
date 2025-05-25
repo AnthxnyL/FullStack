@@ -67,6 +67,21 @@ export default function NewProject() {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      // Vérification taille max 2 Mo
+      if (file.size > 2 * 1024 * 1024) {
+        setMessage("L'image ne doit pas dépasser 2 Mo.");
+        setImageFile(null);
+        setImagePreview(null);
+        return;
+      }
+      // Vérification type MIME
+      const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp", "image/svg+xml", "image/heic"];
+      if (!allowedTypes.includes(file.type)) {
+        setMessage("Type de fichier non autorisé. Formats acceptés : jpg, png, gif, webp, svg, heic.");
+        setImageFile(null);
+        setImagePreview(null);
+        return;
+      }
       setImageFile(file);
       
       // Créer une prévisualisation de l'image
@@ -337,7 +352,7 @@ export default function NewProject() {
             id="imageFile"
             name="imageFile"
             onChange={handleImageChange}
-            accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
+            accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml,image/heic"
             className="w-full p-2 border rounded"
           />
           

@@ -113,7 +113,17 @@ hr {
 
 @media (min-width: 1080px) {
   .container, main {
-    max-width: 800px;
+    max-width: 1040px;
+    padding: 2rem 2rem;
+  }
+  input, select, textarea, button {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container, main {
+    max-width: 1240px;
     padding: 2rem 2rem;
   }
   input, select, textarea, button {

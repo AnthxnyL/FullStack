@@ -94,7 +94,7 @@ export default function Home() {
       <h1>Liste des projects</h1>
       {/* Affichage des project */}
       {projects.length > 0 ? (
-        <ul>
+        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {projects.map((project) => (
             project.is_active ? (
               <li key={project.id} style={{ marginBottom: '30px' }}>
@@ -104,12 +104,12 @@ export default function Home() {
                     <img 
                       src={`${process.env.NEXT_PUBLIC_API_URL}/uploads/projects/${project.image}`}
                       alt={project.title}
-                      className="pb-4"
+                      className="pb-4 aspect-[16/9] object-cover w-full"
                     >
                     </img>
                   </div>
                 )}
-                <p>{project.description}</p>
+                <p>{project.description.length > 40 ? project.description.slice(0, 40) + "..." : project.description}</p>
                 <div className="flex gap-2">
                   <button>
                     <Link href={`/project/${project.id}`}>Open</Link>
@@ -136,7 +136,7 @@ export default function Home() {
             ) : isAdmin && (
               <li key={project.id} style={{ opacity: 0.5 }}>
                 <h2>{project.title} (caché)</h2>
-                <p>{project.description}</p>
+                <p>{project.description.length > 40 ? project.description.slice(0, 40) + "..." : project.description}</p>
                 <div>
                   <button>
                     <Link href={`/project/${project.id}`}>Open</Link>
