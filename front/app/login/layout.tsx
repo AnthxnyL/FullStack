@@ -2,7 +2,7 @@ import type { Metadata } from "next";
  
 export const metadata: Metadata = {
   title: "Connexion",
-  description: "Connexion à notre blog",
+  description: "Connexion à notre portfolio",
 };
  
 export default function RootLayout({
