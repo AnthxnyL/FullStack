@@ -69,11 +69,11 @@ export default function Register() {
                 <input type="text" name="lastName" placeholder="Doe" required />
                 <label htmlFor="study_year">Année d&apos;étude</label>
                 <select name="study_year" required defaultValue={1}>
-                  <option value={1}>1ère année</option>
-                  <option value={2}>2ème année</option>
-                  <option value={3}>3ème année</option>
-                  <option value={4}>4ème année</option>
-                  <option value={5}>5ème année</option>
+                    <option value={1}>1ère année</option>
+                    <option value={2}>2ème année</option>
+                    <option value={3}>3ème année</option>
+                    <option value={4}>4ème année</option>
+                    <option value={5}>5ème année</option>
                 </select>
                 <button type="submit">Inscription</button>
             </form>

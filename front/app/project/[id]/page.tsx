@@ -37,7 +37,7 @@ export default function ArticlePage() {
                     <div key={student.id} className="mb-2">
                         <h2>Élève</h2>
                         <p>{student.first_name} {student.last_name}</p>
-                        <p>Année d&apos;étude : {student.study_year} / 5</p>
+                        <p>Année d&apos;étude : {student.study_year}</p>
                     </div>
                 ))
             ) : (

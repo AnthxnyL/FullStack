@@ -209,7 +209,7 @@ export default function NewProject() {
   }, [message]);
 
   return (
-    <div className="container mx-auto p-4">
+    <div>
       <h1>Ajouter un nouveau projet</h1>
       {message && (
         message.includes("succès") ? (
